@@ -36,7 +36,8 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
+			<!-- uncomment this for  org.jvnet.jaxb2.maven2-->
+			<!--  <plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<version>0.12.1</version>
@@ -53,6 +54,30 @@
 					<generateDirectory>${project.basedir}/src/main/java</generateDirectory>
 					<schemaDirectory>src/main/resources/xsd</schemaDirectory>
 					<schemaIncludes>*.xsd</schemaIncludes>
+				</configuration>
+			</plugin>-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>xjc</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<sources>
+						<source>src/main/resources/xsd/sample_CustomersOrders.xsd</source>
+						<source>src/main/resources/xsd</source>
+					</sources>
+					<outputDirectory>src/main/java</outputDirectory>
+					<!-- The package of your generated sources -->
+					<packageName>com.searchendeca.main.pojo</packageName>
+					<clearOutputDir>true</clearOutputDir>
+					<addGeneratedAnnotation>false</addGeneratedAnnotation>
 				</configuration>
 			</plugin>
 		</plugins>
